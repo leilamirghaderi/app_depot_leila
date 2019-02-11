@@ -1,8 +1,30 @@
 <h1>Hello from Rails!</h1>
 <p>
-It is now <%= @time %>
+  It is now <%= @time %>
 </p>
 <p>
- Time to say
-<%= link_to "Goodbye", say_goodbye_path %>!
+  Time to say
+  <%= link_to "Goodbye", say_goodbye_path %>!
+</p>
+<p>
+  Addition:
+  <%= 1+2 %>
+</p>
+<p>
+  Concatenation:
+  <%= "cow" + "boy" %>
+</p>
+<p>
+  Time in one hour:
+  <%= 1.hour.from_now.localtime %>
+</p>
+
+<p>
+  Call all file from directory:
+  <%= @files = Dir.glob('*') %>
+</p>
+<p>
+  <%= @files.each do |file| %>
+  file name is: <%= file %>
+  <% end %>
 </p>
