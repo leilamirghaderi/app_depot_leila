@@ -15,7 +15,8 @@ Rails.application.configure do
   config.web_console.whitelisted_ips = %w( 0.0.0.0/0 ::/0 )
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
+  if Rails.root.join('tmp/caching-dev.txt').exist?
+    config.action_controller.enable_fragment_cache_logging = true
     config.action_controller.perform_caching = true
 
     config.cache_store = :memory_store
