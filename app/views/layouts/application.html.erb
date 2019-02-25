@@ -1,11 +1,11 @@
-<!DOCTYPE html>
 <html>
 <head>
-  <title>Books Online Store</title>
+  <title>Pragprog Books Online Store</title>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag 'application', media: 'all',
   'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application',
+  'data-turbolinks-track': 'reload' %>
 </head>
 <body>
   <header class="main">
@@ -14,15 +14,19 @@
   </header>
   <section class="content">
     <nav class="side_nav">
+      <div id="cart" class="carts">
+        <%= render @cart %>
+      </div>
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/questions">Questions</a></li>
         <li><a href="/news">News</a></li>
         <li><a href="/contact">Contact</a></li>
       </ul>
-      </nav>
-  <main class='<%= controller.controller_name %>'>
-    <%= yield %>
-  </main>
+    </nav>
+    <main class='<%= controller.controller_name %>'>
+      <%= yield %>
+    </main>
+  </section>
 </body>
 </html>
