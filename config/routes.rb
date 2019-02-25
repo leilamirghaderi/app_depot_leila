@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'book/action1'
+    get 'book/action2'
+  end
   resources :line_items
   resources :carts
   #get 'store/index'
