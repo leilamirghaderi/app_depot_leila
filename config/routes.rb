@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   #get 'store/index'
   root 'store#index', as: 'store_index'
 
-  resources :products
-  get 'say/hello'
-  get 'say/goodbye'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :products, shallow: true do
+    resources :reviews
+  end
 end
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
