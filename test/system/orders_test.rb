@@ -1,41 +1,21 @@
 require "application_system_test_case"
 
-class OrdersTest < ApplicationSystemTestCase
-  setup do
-    @order = orders(:one)
-  end
+  class OrdersTest < ApplicationSystemTestCase
+    test "check routing number" do
+      visit store_index_url
 
-  test "visiting the index" do
-    visit orders_url
-    assert_selector "h1", text: "Orders"
-  end
+      first('.catalog li').click_on 'Add to Cart'
 
-  test "creating a Order" do
-    visit orders_url
-    click_on "New Order"
+      click_on 'Checkout'
 
-    click_on "Create Order"
+      fill_in 'order_name', with: 'Dave Thomas'
+      fill_in 'order_address', with: '123 Main Street'
+      fill_in 'order_email', with: 'dave@example.com'
 
-    assert_text "Order was successfully created"
-    click_on "Back"
-  end
+      assert_no_selector "#order_routing_number"
 
-  test "updating a Order" do
-    visit orders_url
-    click_on "Edit", match: :first
+      select 'Check', from: 'pay_type'
 
-    click_on "Update Order"
-
-    assert_text "Order was successfully updated"
-    click_on "Back"
-  end
-
-  test "destroying a Order" do
-    visit orders_url
-    page.accept_confirm do
-      click_on "Destroy", match: :first
+      assert_selector "#order_routing_number"
     end
-
-    assert_text "Order was successfully destroyed"
   end
-end
