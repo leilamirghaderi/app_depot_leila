@@ -1,17 +1,9 @@
 class CartsController < ApplicationController
+  skip_before_action :authorize, only: [:create, :update, :destroy]
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
   # GET /carts
   # GET /carts.json
-  module CurrentCart
-    private
-    def set_cart
-      @cart = Cart.find(session[:cart_id])
-    rescue ActiveRecord::RecordNotFound
-      @cart = Cart.create
-      session[:cart_id] = @cart.id
-    end
-  end
   def index
     @carts = Cart.all
   end
@@ -68,12 +60,14 @@ class CartsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to store_index_url,
         notice: 'Your cart is currently empty' }
-        format.json { head :no_content }
-      end
+      format.json { head :no_content }
     end
+  end
 
+  # ...
   private
-    # Use callbacks to share common setup or constraints between actions.
+  # ...
+
     def set_cart
       @cart = Cart.find(params[:id])
     end
@@ -86,4 +80,4 @@ class CartsController < ApplicationController
       logger.error "Attempt to access invalid cart #{params[:id]}"
       redirect_to store_index_url, notice: 'Invalid cart'
     end
-  end
+end
